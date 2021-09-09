@@ -4,6 +4,9 @@ interface TimelineObserverProps {
   handleObserve?: (
     observer: (target: Element, callbackFn?: () => void) => void
   ) => JSX.Element;
+
+  initialColor?: string;
+  fillColor?: string;
 }
 
 const halfScreenHeight = window.innerHeight / 2;
@@ -43,36 +46,44 @@ function removeObservable({ obs, observableList }) {
   }
 }
 
-function colorize(observableList) {
+function colorize(observableList, initialColor, fillColor) {
   observableList.forEach((observable) => {
     if (!observable.isPassed) {
       const rect = observable.observable.target.getBoundingClientRect();
       const entry = observable?.observable;
 
       if (rect.bottom > halfScreenHeight && rect.top < halfScreenHeight) {
-        const depthPx = rect.bottom - halfScreenHeight;
-        const depthPercent = (depthPx * 100) / rect.height;
-        entry.target.style.background = `linear-gradient(to top, #e5e5e5 ${depthPercent}%, #53b374 ${depthPercent}% 100%)`;
-        entry.target.style.transform = "translateZ(0)";
+        if (initialColor && fillColor) {
+          const depthPx = rect.bottom - halfScreenHeight;
+          const depthPercent = (depthPx * 100) / rect.height;
+          entry.target.style.background = `linear-gradient(to top, #e5e5e5 ${depthPercent}%, #53b374 ${depthPercent}% 100%)`;
+          entry.target.style.transform = "translateZ(0)";
+        }
       }
       if (rect.bottom < halfScreenHeight) {
-        entry.target.style.background = "#53b374";
-        entry.target.style.color = "white";
-        entry.target.style.transform = "unset";
-        removeObservable({
-          obs: entry,
-          observableList,
-        });
+        if (initialColor && fillColor) {
+          entry.target.style.background = "#53b374";
+          entry.target.style.transform = "unset";
+        }
 
         if (observable?.callbackFn) {
           observable?.callbackFn();
         }
+
+        removeObservable({
+          obs: entry,
+          observableList,
+        });
       }
     }
   });
 }
 
-const TimelineObserver = ({ handleObserve }: TimelineObserverProps) => {
+const TimelineObserver = ({
+  handleObserve,
+  initialColor,
+  fillColor,
+}: TimelineObserverProps) => {
   const observablesStore = useRef(new Map<string, ObservablesProps>());
   const callbacks = useRef<{ [key: string]: () => void }>({});
 
@@ -91,7 +102,7 @@ const TimelineObserver = ({ handleObserve }: TimelineObserverProps) => {
 
   const animation = () => {
     window.requestAnimationFrame(() => {
-      colorize(observablesStore.current);
+      colorize(observablesStore.current, initialColor, fillColor);
     });
   };
 
@@ -100,11 +111,6 @@ const TimelineObserver = ({ handleObserve }: TimelineObserverProps) => {
     return () => {
       document.removeEventListener("scroll", animation);
     };
-  }, []);
-
-  useEffect(() => {
-    observablesStore.current.clear();
-    callbacks.current = {};
   }, []);
 
   const setObserver = (elem: Element, callbackFn?: () => void) => {
