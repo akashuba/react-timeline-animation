@@ -2,6 +2,8 @@
 
 ### Could be used for timeline filling or any animations related to scrolling and crossing the middle of the screen.
 
+### Demo [codesandbox](https://codesandbox.io/s/brave-kepler-fdbzv?file=/src/App.js:0-1097)
+
 ## How to use it
 
 1. Installation
