@@ -1,8 +1,8 @@
-# react-scroll-animation component.
+# React scroll animation component.
 
-### Could be used for timeline filling or any animations related to scrolling and crossing the middle of the screen. Just wrap the animated component with TimelineObserver.
+#### Could be used for timeline filling or any animations related to scrolling and crossing the middle of the screen. Just wrap the animated component with TimelineObserver.
 
-## Demo [codesandbox](https://codesandbox.io/s/brave-kepler-fdbzv?file=/src/App.js:0-1097)
+## Demo [codesandbox](https://codesandbox.io/s/brave-kepler-fdbzv?file=/src/App.js:0-1097) 🚀
 
 ## How to use it
 
@@ -57,7 +57,7 @@ const Timeline = ({ setObserver, callback }) => {
 };
 ```
 
-## Options (props)
+## Options (props) 🛠
 
 #### `initialColor`: not required. Initial color of observable element.
 
