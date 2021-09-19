@@ -1,8 +1,11 @@
 # React scroll animation component.
 
-#### Could be used for timeline filling or any animations related to scrolling and crossing the middle of the screen. Just wrap the animated component with TimelineObserver.
+#### Could be used for timeline filling or any animations related to scrolling and crossing the middle of the screen. Just wrap the animated component with TimelineObserver.  
 
-![Alt Text]()
+<div align="center">
+<img src="https://github.com/akashuba/react-timeline-animation/blob/main/demo/scroll_3.gif" alt="drawing" width="500"/>
+</div>
+
 ## Demo [codesandbox](https://codesandbox.io/s/brave-kepler-fdbzv?file=/src/App.js:0-1097) 🚀
 
 ## How to use it
@@ -44,6 +47,7 @@ Component using react "render prop" pattern.
 const Timeline = ({ setObserver, callback }) => {
   const timeline = useRef(null);
 
+  // It Will be fired when the element crossed the middle of the screen. 
   const someCallback = () => {
     callback();
   };
