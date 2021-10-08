@@ -56,13 +56,13 @@ function colorize(observableList, initialColor, fillColor) {
         if (initialColor && fillColor) {
           const depthPx = rect.bottom - halfScreenHeight;
           const depthPercent = (depthPx * 100) / rect.height;
-          entry.target.style.background = `linear-gradient(to top, #e5e5e5 ${depthPercent}%, #53b374 ${depthPercent}% 100%)`;
+          entry.target.style.background = `linear-gradient(to top, ${initialColor} ${depthPercent}%, ${fillColor} ${depthPercent}% 100%)`;
           entry.target.style.transform = "translateZ(0)";
         }
       }
       if (rect.bottom < halfScreenHeight) {
         if (initialColor && fillColor) {
-          entry.target.style.background = "#53b374";
+          entry.target.style.background = fillColor;
           entry.target.style.transform = "unset";
         }
 
