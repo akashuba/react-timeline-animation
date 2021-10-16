@@ -113,8 +113,12 @@ const TimelineObserver = ({
     };
   }, []);
 
-  const setObserver = (elem: Element, callbackFn?: () => void) => {
+  const setObserver = (elem: HTMLElement, callbackFn?: () => void) => {
     const elemId = elem?.id;
+
+    if (initialColor) {
+      elem.style.background = initialColor;
+    }
 
     observer.current.observe(elem);
 
