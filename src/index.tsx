@@ -9,7 +9,10 @@ interface TimelineObserverProps {
   fillColor?: string;
 }
 
-const halfScreenHeight = window.innerHeight / 2;
+let halfScreenHeight;
+if (typeof window !== "undefined") {
+  halfScreenHeight = window?.innerHeight / 2;
+}
 
 const options = {
   root: null,
