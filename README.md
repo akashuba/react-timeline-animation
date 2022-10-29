@@ -69,6 +69,7 @@ const Timeline = ({ setObserver, callback }) => {
 #### `fillColor`: not required. Color to fill element.
 
 #### `handleObserve`: required. "render prop" to handle observable element.
+#### `hasReverse`: not required. Allow to scroll in both directions.
 
 ```typescript
 interface TimelineObserverProps {
@@ -77,5 +78,6 @@ interface TimelineObserverProps {
   ) => JSX.Element;
   initialColor?: string;
   fillColor?: string;
+  hasReverse?: boolean;
 }
 ```
