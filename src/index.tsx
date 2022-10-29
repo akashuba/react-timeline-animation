@@ -7,6 +7,7 @@ interface TimelineObserverProps {
 
   initialColor?: string;
   fillColor?: string;
+  hasReverse?: boolean;
 }
 
 let halfScreenHeight;
@@ -49,7 +50,7 @@ function removeObservable({ obs, observableList }) {
   }
 }
 
-function colorize(observableList, initialColor, fillColor) {
+function colorize({ observableList, initialColor, fillColor, hasReverse }) {
   observableList.forEach((observable) => {
     if (!observable.isPassed) {
       const rect = observable.observable.target.getBoundingClientRect();
@@ -63,6 +64,7 @@ function colorize(observableList, initialColor, fillColor) {
           entry.target.style.transform = "translateZ(0)";
         }
       }
+
       if (rect.bottom < halfScreenHeight) {
         if (initialColor && fillColor) {
           entry.target.style.background = fillColor;
@@ -73,10 +75,16 @@ function colorize(observableList, initialColor, fillColor) {
           observable?.callbackFn();
         }
 
-        removeObservable({
-          obs: entry,
-          observableList,
-        });
+        if (!hasReverse) {
+          removeObservable({
+            obs: entry,
+            observableList,
+          });
+        }
+      }
+
+      if (rect.top > halfScreenHeight && hasReverse) {
+        entry.target.style.background = initialColor;
       }
     }
   });
@@ -86,6 +94,7 @@ const TimelineObserver = ({
   handleObserve,
   initialColor,
   fillColor,
+  hasReverse,
 }: TimelineObserverProps) => {
   const observablesStore = useRef(new Map<string, ObservablesProps>());
   const callbacks = useRef<{ [key: string]: () => void }>({});
@@ -105,7 +114,12 @@ const TimelineObserver = ({
 
   const animation = () => {
     window.requestAnimationFrame(() => {
-      colorize(observablesStore.current, initialColor, fillColor);
+      colorize({
+        observableList: observablesStore.current,
+        initialColor,
+        fillColor,
+        hasReverse,
+      });
     });
   };
 
