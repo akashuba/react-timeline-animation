@@ -72,7 +72,11 @@ function colorize({ observableList, initialColor, fillColor, hasReverse }) {
         }
 
         if (observable?.callbackFn) {
-          observable?.callbackFn();
+          if (!observable?.callbackFired) {
+            observable?.callbackFn();
+
+            observable.callbackFired = true;
+          }
         }
 
         if (!hasReverse) {
