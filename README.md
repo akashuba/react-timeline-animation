@@ -6,6 +6,7 @@
 <div align="center">
 <img src="https://github.com/akashuba/react-timeline-animation/blob/main/demo/scroll_3.gif" alt="drawing" width="500"/>
 </div>  
+
 ## Demo [codesandbox](https://codesandbox.io/s/brave-kepler-fdbzv?file=/src/App.js:0-1097) 🚀
 
 ## How to use it
