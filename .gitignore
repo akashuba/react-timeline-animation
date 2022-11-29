@@ -49,3 +49,6 @@ dist
 
 # vscode
 .vscode
+/test-results/
+/playwright-report/
+/playwright/.cache/
