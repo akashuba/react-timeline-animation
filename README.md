@@ -1,10 +1,11 @@
 # React scroll animation component.
+![test parameter](https://github.com/akashuba/react-timeline-animation/actions/workflows/playwright.yml/badge.svg)     
 
 #### Could be used for timeline filling or any animations related to scrolling and crossing the middle of the screen. Just wrap the animated component with TimelineObserver.  
 
 <div align="center">
 <img src="https://github.com/akashuba/react-timeline-animation/blob/main/demo/scroll_3.gif" alt="drawing" width="500"/>
-</div>
+</div>  
 
 ## Demo [codesandbox](https://codesandbox.io/s/brave-kepler-fdbzv?file=/src/App.js:0-1097) 🚀
 
