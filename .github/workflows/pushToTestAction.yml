@@ -1,0 +1,21 @@
+name: push to test
+on: 
+  push:
+    branches: [master, main]
+jobs:
+  merge-master-to-test:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set Git config
+      run: |
+          git config --local user.email "kashuba-aleksandr@mail.ru"
+          git config --local user.name "akashuba"
+    - name: Merge master back to test
+      run: |
+          git fetch --unshallow
+          git checkout test
+          git pull
+          git merge --no-ff main -m "Auto-merge master to test"
+          git push
